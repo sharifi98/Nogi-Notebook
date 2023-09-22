@@ -12,6 +12,7 @@ struct Nogi_NotebookApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .colorScheme(.dark)
         }
     }
 }

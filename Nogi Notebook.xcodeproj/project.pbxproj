@@ -11,6 +11,11 @@
 		036CBB992ABDB3D00074F2BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBB982ABDB3D00074F2BE /* ContentView.swift */; };
 		036CBB9B2ABDB3D20074F2BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036CBB9A2ABDB3D20074F2BE /* Assets.xcassets */; };
 		036CBB9F2ABDB3D20074F2BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036CBB9E2ABDB3D20074F2BE /* Preview Assets.xcassets */; };
+		036CBBA62ABDB5A30074F2BE /* SubmissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBA52ABDB5A30074F2BE /* SubmissionListView.swift */; };
+		036CBBA82ABDB6230074F2BE /* submissions.json in Resources */ = {isa = PBXBuildFile; fileRef = 036CBBA72ABDB6230074F2BE /* submissions.json */; };
+		036CBBAA2ABDB63B0074F2BE /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBA92ABDB63B0074F2BE /* Submission.swift */; };
+		036CBBAC2ABDB9D60074F2BE /* SubmissionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */; };
+		036CBBAE2ABDBFE40074F2BE /* AddTraningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +25,11 @@
 		036CBB9A2ABDB3D20074F2BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		036CBB9C2ABDB3D20074F2BE /* Nogi_Notebook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nogi_Notebook.entitlements; sourceTree = "<group>"; };
 		036CBB9E2ABDB3D20074F2BE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		036CBBA52ABDB5A30074F2BE /* SubmissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionListView.swift; sourceTree = "<group>"; };
+		036CBBA72ABDB6230074F2BE /* submissions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = submissions.json; sourceTree = "<group>"; };
+		036CBBA92ABDB63B0074F2BE /* Submission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
+		036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionDetailView.swift; sourceTree = "<group>"; };
+		036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTraningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +64,11 @@
 			children = (
 				036CBB962ABDB3D00074F2BE /* Nogi_NotebookApp.swift */,
 				036CBB982ABDB3D00074F2BE /* ContentView.swift */,
+				036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */,
+				036CBBA52ABDB5A30074F2BE /* SubmissionListView.swift */,
+				036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */,
+				036CBBA92ABDB63B0074F2BE /* Submission.swift */,
+				036CBBA72ABDB6230074F2BE /* submissions.json */,
 				036CBB9A2ABDB3D20074F2BE /* Assets.xcassets */,
 				036CBB9C2ABDB3D20074F2BE /* Nogi_Notebook.entitlements */,
 				036CBB9D2ABDB3D20074F2BE /* Preview Content */,
@@ -129,6 +144,7 @@
 			files = (
 				036CBB9F2ABDB3D20074F2BE /* Preview Assets.xcassets in Resources */,
 				036CBB9B2ABDB3D20074F2BE /* Assets.xcassets in Resources */,
+				036CBBA82ABDB6230074F2BE /* submissions.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +155,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036CBBAE2ABDBFE40074F2BE /* AddTraningView.swift in Sources */,
+				036CBBA62ABDB5A30074F2BE /* SubmissionListView.swift in Sources */,
+				036CBBAA2ABDB63B0074F2BE /* Submission.swift in Sources */,
 				036CBB992ABDB3D00074F2BE /* ContentView.swift in Sources */,
+				036CBBAC2ABDB9D60074F2BE /* SubmissionDetailView.swift in Sources */,
 				036CBB972ABDB3D00074F2BE /* Nogi_NotebookApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
