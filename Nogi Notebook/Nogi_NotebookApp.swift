@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Nogi_NotebookApp: App {
+    let workoutStore = WorkoutStore()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(workoutStore)
                 .colorScheme(.dark)
         }
     }

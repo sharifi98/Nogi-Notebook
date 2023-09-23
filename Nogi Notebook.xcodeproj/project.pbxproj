@@ -16,6 +16,8 @@
 		036CBBAA2ABDB63B0074F2BE /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBA92ABDB63B0074F2BE /* Submission.swift */; };
 		036CBBAC2ABDB9D60074F2BE /* SubmissionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */; };
 		036CBBAE2ABDBFE40074F2BE /* AddTraningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */; };
+		036CBBB02ABDE2610074F2BE /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAF2ABDE2610074F2BE /* Workout.swift */; };
+		036CBBB22ABDE3300074F2BE /* WorkoutStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		036CBBA92ABDB63B0074F2BE /* Submission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
 		036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionDetailView.swift; sourceTree = "<group>"; };
 		036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTraningView.swift; sourceTree = "<group>"; };
+		036CBBAF2ABDE2610074F2BE /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 				036CBBA52ABDB5A30074F2BE /* SubmissionListView.swift */,
 				036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */,
 				036CBBA92ABDB63B0074F2BE /* Submission.swift */,
+				036CBBAF2ABDE2610074F2BE /* Workout.swift */,
+				036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */,
 				036CBBA72ABDB6230074F2BE /* submissions.json */,
 				036CBB9A2ABDB3D20074F2BE /* Assets.xcassets */,
 				036CBB9C2ABDB3D20074F2BE /* Nogi_Notebook.entitlements */,
@@ -157,8 +163,10 @@
 			files = (
 				036CBBAE2ABDBFE40074F2BE /* AddTraningView.swift in Sources */,
 				036CBBA62ABDB5A30074F2BE /* SubmissionListView.swift in Sources */,
+				036CBBB02ABDE2610074F2BE /* Workout.swift in Sources */,
 				036CBBAA2ABDB63B0074F2BE /* Submission.swift in Sources */,
 				036CBB992ABDB3D00074F2BE /* ContentView.swift in Sources */,
+				036CBBB22ABDE3300074F2BE /* WorkoutStore.swift in Sources */,
 				036CBBAC2ABDB9D60074F2BE /* SubmissionDetailView.swift in Sources */,
 				036CBB972ABDB3D00074F2BE /* Nogi_NotebookApp.swift in Sources */,
 			);
