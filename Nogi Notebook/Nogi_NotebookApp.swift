@@ -16,6 +16,7 @@ struct Nogi_NotebookApp: App {
             ContentView()
                 .environmentObject(workoutStore)
                 .colorScheme(.dark)
+             
         }
     }
 }

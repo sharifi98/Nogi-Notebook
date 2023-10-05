@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+
+
+
+
+
 struct AddTraningView: View {
+    
+    // array of random work
+    
     
     @EnvironmentObject var workoutStore: WorkoutStore
     
@@ -15,17 +23,20 @@ struct AddTraningView: View {
     private let roundsRange = 1...20
     private let roundLengthRange = 1...8
     
-    private let df: DateFormatter = {
+    private var df: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
+        formatter.dateFormat = "EEEE, d MMM, HH:mm"  // Military time using HH:mm
         formatter.locale = Locale(identifier: "en_GB")
         return formatter
-    }()
+    }
+
     
     @Environment(\.dismiss) var dismiss
     @Binding var showAddTraningView: Bool
     
+    @State private var name = ""
+    @State private var startTime = Date()
+    @State private var endTime = Date()
     @State private var submissions = 0
     @State private var taps = 0
     @State private var sweeps = 0
@@ -41,6 +52,7 @@ struct AddTraningView: View {
     var body: some View {
         NavigationStack {
             List {
+                nameSection
                 headerSection
                 statsSection
                 roundsSection
@@ -54,12 +66,21 @@ struct AddTraningView: View {
         }
     }
     
+    
+    
     // MARK: - Subviews
-    private var headerSection: some View {
+    
+    private var nameSection: some View{
         VStack {
-            Text(df.string(from: Date()))
+            TextField("Workout name", text: $name)
+                .multilineTextAlignment(.leading)
         }
     }
+    
+    private var headerSection: some View {
+        DateAndTimePicker(selectedDate: $startTime, selectedTime: $endTime)
+    }
+
     
     private var statsSection: some View {
         Section {
@@ -92,6 +113,7 @@ struct AddTraningView: View {
             }
             .pickerStyle(.palette)
         }
+        .padding(.bottom)
     }
     
     private var summarySection: some View {
@@ -108,8 +130,10 @@ struct AddTraningView: View {
         Group {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    let newWorkout = Workout(date: Date(),
-                                             submissions: submissions,
+                    let newWorkout = Workout(name: "NoGi",
+                                             startTime: startTime,
+                                             endTime: endTime,
+                                             submissions:   submissions,
                                              taps: taps,
                                              sweeps: sweeps,
                                              rounds: rounds,

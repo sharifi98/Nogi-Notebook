@@ -10,17 +10,59 @@ import SwiftUI
 struct ContentView: View {
     @State private var showAddTraningView = false
     @StateObject private var workoutStore = WorkoutStore()
+
+    
+    private var dayFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE"
+        formatter.locale = Locale(identifier: "en_GB")  // Norwegian locale
+        return formatter
+    }
+
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM"
+        formatter.locale = Locale(identifier: "en_GB")  // Norwegian locale
+        return formatter
+    }
+
+    private var timeFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.locale = Locale(identifier: "en_GB")  // Norwegian locale
+        return formatter
+    }
+
+
+
+    
+    
     
     var body: some View {
         NavigationStack {
             
-            List(workoutStore.workouts) { workout in
-                HStack {
-                    Text("\(workout.date)")
-                    Spacer()
-                    Text("\(workout.rounds) rounds")
+            
+            
+            List {
+                ForEach(workoutStore.workouts) { workout in
+                    NavigationLink(destination: Text("Hello")) {
+                        HStack {
+                            VStack {
+                                Text(dayFormatter.string(from: workout.startTime))
+                                Spacer(minLength: 10)
+                                Text(dateFormatter.string(from: workout.startTime))
+                                Spacer(minLength: 10)
+                                Text(timeFormatter.string(from: workout.startTime))
+                                Spacer()
+                            }
+                            .padding()
+                            Text("\(workout.rounds) rounds")
+                        }
+                    }
                 }
             }
+
+
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add") {
@@ -34,8 +76,17 @@ struct ContentView: View {
             }
         }
     }
+    
+
+    
+    
+    
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
+
+

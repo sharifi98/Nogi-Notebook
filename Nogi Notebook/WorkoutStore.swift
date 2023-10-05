@@ -8,7 +8,11 @@
 import SwiftUI
 
 class WorkoutStore: ObservableObject {
-    @Published var workouts: [Workout] = []
+    @Published var workouts: [Workout]
+    
+    init(workouts: [Workout] = [Workout.sample]) {
+        self.workouts = workouts
+    }
     
     func add(workout: Workout) {
         DispatchQueue.main.async {
@@ -16,6 +20,7 @@ class WorkoutStore: ObservableObject {
         }
     }
 }
+
 
 
 
