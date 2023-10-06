@@ -15,11 +15,10 @@ struct WorkoutCardView: View {
     }
     
     func format(duration: TimeInterval) -> String {
-        let hours = Int(duration) / 3600
-        let minutes = Int(duration) % 3600 / 60
-        return String(format: "%02i:%02i", hours, minutes) // This will give you HH:MM format
+        let totalMinutes = Int(duration) / 60
+        return "\(totalMinutes) min"
     }
-    
+
     
     private var dayFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -46,46 +45,67 @@ struct WorkoutCardView: View {
         VStack {
             HStack {
                 VStack {
-                    Text(dayFormatter.string(from: workout.startTime))
-                        .padding()
-                        .background(Color.gray.opacity(0.4))
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
-                    
-                    Text(dateFormatter.string(from: workout.startTime))
+                    VStack {
+                        Text(dayFormatter.string(from: workout.startTime))
+                            .font(.system(size: 12))
+                        Text(dateFormatter.string(from: workout.startTime))
+                            .bold()
+                    }
+                    .foregroundStyle(.black)
+                    .padding(2)
+                    .background(Color.white)
+                    .cornerRadius(5)
+                    Spacer()
                 }
-                .bold()
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
-                .shadow(radius: 5)
                 
-                Spacer()
-                
-                VStack {
+
+                // Workout details (Blue)
+                VStack(alignment: .leading) {
                     Text(workout.name)
                         .bold()
-                    Text("Rounds: \(workout.rounds)")
-                    Text("Rounds: \(workout.rounds)")
+                    Text("• \(workout.rounds) x Rounds")
+                    Text("• \(workout.submissions) x Submissions")
+                    Text("• \(workout.taps) x Taps")
+                    Text("• \(workout.sweeps) x Sweeps")
                 }
-                
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(.white)
+                .padding(.leading, 10)
+
                 Spacer()
-                
-                VStack {
+
+                // Duration section (Gray)
+                VStack(alignment: .leading) {
                     Text(format(duration: workout.duration))
                         .font(.headline)
-                        .foregroundColor(.gray) // Or any color you think is appropriate
+                        .foregroundStyle(.gray)
                 }
-                
-                Spacer()
+                .padding()
+                .font(.system(size: 12))
             }
+            .padding()
+            .frame(minWidth: 350, maxHeight: 150)
+            .background(
+                // Using a ZStack to overlay colors and divide the card into three sections
+                ZStack {
+                    Color.white
+                    GeometryReader { geometry in
+                        Color.blue.opacity(0.9)
+                            .frame(width: geometry.size.width / 3 * 2)
+                        Color.black
+                            .opacity(0.85)
+                            .frame(width: geometry.size.width / 3)
+                            .offset(x: geometry.size.width / 3 * 2)
+                    }
+                }
+            )
+            .cornerRadius(10)
+            .shadow(radius: 5)
         }
-        .padding()
-        .frame(minWidth: 350)
-        .background(Color.blue.opacity(0.3))
-        .cornerRadius(10)
-        .shadow(radius: 5)
     }
+
+
+
     
 }
 
