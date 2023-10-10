@@ -60,12 +60,15 @@ struct ContentView: View {
                 
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button("Add") {
+                        Button {
                             showAddTraningView = true
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .foregroundStyle(.cyan)
                         }
                     }
                 }
-                .sheet(isPresented: $showAddTraningView) {
+                .fullScreenCover(isPresented: $showAddTraningView) {
                     AddTraningView(showAddTraningView: $showAddTraningView)
                         .environmentObject(workoutStore) // ensure the environmentObject is passed down
             }

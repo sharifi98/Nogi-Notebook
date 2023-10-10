@@ -96,8 +96,12 @@ struct AddTraningView: View {
             Picker("Rounds rolled", selection: $rounds) {
                 ForEach(roundsRange, id: \.self) { number in
                     Text("\(number)").tag(number)
+                        .rotationEffect(Angle(degrees: 90))
+
+                    
                 }
             }
+            .rotationEffect(Angle(degrees: -90))
             .pickerStyle(.wheel)
             .frame(height: 150)
         }
