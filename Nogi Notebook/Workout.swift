@@ -15,6 +15,7 @@ struct Workout: Identifiable {
     let submissions: Int
     let taps: Int
     let sweeps: Int
+    let takedowns: Int
     let rounds: Int
     let roundLength: Int
     
@@ -23,7 +24,7 @@ struct Workout: Identifiable {
     }
     
     static var sample: Workout {
-        return Workout(name: "NoGi", startTime: Date(), endTime: Date(), submissions: 5, taps: 2, sweeps: 3, rounds: 4, roundLength: 6)
+        return Workout(name: "NoGi", startTime: Date(), endTime: Date(), submissions: 5, taps: 2, sweeps: 3, takedowns: 2, rounds: 4, roundLength: 6)
     }
 
 
@@ -38,6 +39,7 @@ extension Workout {
                     submissions: Int.random(in: 0...5),
                     taps: Int.random(in: 0...2),
                     sweeps: Int.random(in: 0...4),
+                    takedowns: Int.random(in: 0...4),
                     rounds: Int.random(in: 3...6),
                     roundLength: 6)
         }

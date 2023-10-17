@@ -15,21 +15,21 @@ struct ContentView: View {
     private var dayFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
-        formatter.locale = Locale(identifier: "en_GB")  // Norwegian locale
+        formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMM"
-        formatter.locale = Locale(identifier: "en_GB")  // Norwegian locale
+        formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }
     
     private var timeFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
-        formatter.locale = Locale(identifier: "en_GB")  // Norwegian locale
+        formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }
     
@@ -40,24 +40,17 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            
-            
             ScrollView {
                 VStack {
-                    
-                    ForEach(workoutStore.workouts) { workout in
-                        NavigationLink(destination: Text("Hello")) {
-                            
-                            WorkoutCardView(workout: workout)
-                            
+                    ForEach(workoutStore.workouts.reversed()) { workout in
+                        NavigationLink(destination: WorkoutView(workout: workout)) {
+                                WorkoutCardView(workout: workout)
+                                .padding(4)
                         }
                     }
                     
                 }
                 .padding()
-                
-                
-                
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {

@@ -87,6 +87,7 @@ struct AddTraningView: View {
             statStepper(title: "Submissions", value: $submissions)
             statStepper(title: "Taps", value: $taps)
             statStepper(title: "Sweeps", value: $sweeps)
+            statStepper(title: "Takedowns", value: $takedowns)
         }
     }
     
@@ -134,12 +135,13 @@ struct AddTraningView: View {
         Group {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    let newWorkout = Workout(name: "NoGi",
+                    let newWorkout = Workout(name: name,
                                              startTime: startTime,
                                              endTime: endTime,
                                              submissions:   submissions,
                                              taps: taps,
                                              sweeps: sweeps,
+                                             takedowns: takedowns,
                                              rounds: rounds,
                                              roundLength: roundLength)
                     
