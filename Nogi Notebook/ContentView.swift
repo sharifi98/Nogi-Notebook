@@ -47,6 +47,11 @@ struct ContentView: View {
                                 WorkoutCardView(workout: workout)
                                 .padding(4)
                         }
+                        .contextMenu(ContextMenu(menuItems: {
+                            Text("Menu Item 1")
+                            Text("Menu Item 2")
+                            Text("Menu Item 3")
+                        }))
                     }
                     
                 }
