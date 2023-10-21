@@ -19,8 +19,12 @@ class WorkoutStore: ObservableObject {
             self.workouts.append(workout)
         }
     }
+    
+    func remove(at index: Int) {
+        DispatchQueue.main.async {
+            self.workouts.remove(at: index)
+        }
+    }
 }
-
-
 
 

@@ -8,15 +8,16 @@
 import SwiftUI
 
 @main
-struct Nogi_NotebookApp: App {
-    let workoutStore = WorkoutStore()
-    
+struct NogiNotebookApp: App {
+    @StateObject var workoutStore = WorkoutStore() // Initialize with your data or leave empty
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(workoutStore)
-                .colorScheme(.dark)
-             
+            let sampleWorkouts = Workout.generateSampleWorkouts(count: 10)
+            let workoutStore = WorkoutStore(workouts: sampleWorkouts)
+            ContentView().environmentObject(workoutStore)
+                .preferredColorScheme(.dark)
         }
     }
 }
+

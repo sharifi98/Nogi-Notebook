@@ -34,7 +34,11 @@ struct AddTraningView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var showAddTraningView: Bool
     
+    var workoutType = ["Gi", "NoGi"]
+    @State var selectedWorkoutName = "Gi"
+    
     @State private var name = ""
+    @State private var notes = ""
     @State private var startTime = Date()
     @State private var endTime = Date()
     @State private var submissions = 0
@@ -54,6 +58,7 @@ struct AddTraningView: View {
             List {
                 nameSection
                 headerSection
+                notesSection
                 statsSection
                 roundsSection
                 roundLengthSection
@@ -72,9 +77,19 @@ struct AddTraningView: View {
     
     private var nameSection: some View{
         VStack {
-            TextField("Workout name", text: $name)
-                .multilineTextAlignment(.leading)
+            Picker("Select workoutname", selection: $selectedWorkoutName) {
+                ForEach(workoutType, id: \.self) {
+                    Text($0)
+                }
+            }
+            .pickerStyle(.segmented)
         }
+        
+        
+    }
+    
+    private var notesSection: some View {
+        TextField("Notes", text: $notes)
     }
     
     private var headerSection: some View {
@@ -134,8 +149,9 @@ struct AddTraningView: View {
     private var topBarButtons: some ToolbarContent {
         Group {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("Save") {
-                    let newWorkout = Workout(name: name,
+                Button {
+                    let newWorkout = Workout(name: selectedWorkoutName, 
+                                             notes: notes,
                                              startTime: startTime,
                                              endTime: endTime,
                                              submissions:   submissions,
@@ -147,11 +163,17 @@ struct AddTraningView: View {
                     
                     workoutStore.add(workout: newWorkout)
                     dismiss()
+                } label: {
+                    Text("Save")
+                        .foregroundStyle(.cyan)
                 }
             }
             ToolbarItem(placement: .topBarLeading) {
-                Button("Cancel") {
+                Button {
                     dismiss()
+                } label: {
+                    Text("Cancel")
+                        .foregroundStyle(.cyan)
                 }
             }
         }

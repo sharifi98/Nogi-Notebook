@@ -10,6 +10,7 @@ import Foundation
 struct Workout: Identifiable {
     let id = UUID()
     let name: String
+    let notes: String
     let startTime: Date
     let endTime: Date
     let submissions: Int
@@ -24,7 +25,16 @@ struct Workout: Identifiable {
     }
     
     static var sample: Workout {
-        return Workout(name: "NoGi", startTime: Date(), endTime: Date(), submissions: 5, taps: 2, sweeps: 3, takedowns: 2, rounds: 4, roundLength: 6)
+        return Workout(name: "NoGi",
+                       notes: "",
+                       startTime: Date(),
+                       endTime: Date(),
+                       submissions: 5,
+                       taps: 2,
+                       sweeps: 3,
+                       takedowns: 2,
+                       rounds: 4,
+                       roundLength: 6)
     }
 
 
@@ -33,7 +43,9 @@ struct Workout: Identifiable {
 extension Workout {
     static func generateSampleWorkouts(count: Int) -> [Workout] {
         return (1...count).map { _ in
-            Workout(name: "NoGi",
+            let randomName = ["Gi", "NoGi"].randomElement() ?? "NoGi" // Defaults to "NoGi" if for some reason randomElement returns nil
+            return Workout(name: randomName,
+                    notes: "",
                     startTime: Date(),
                     endTime: Date().addingTimeInterval(3600),
                     submissions: Int.random(in: 0...5),

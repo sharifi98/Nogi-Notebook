@@ -122,7 +122,8 @@ struct WorkoutCardView_Previews: PreviewProvider {
     }
     
     static let sampleWorkout = Workout(
-        name: "NoGi",
+        name: "NoGi", 
+        notes: "",
         startTime: Date(),
         endTime: Date(),
         submissions: 3,
