@@ -48,7 +48,7 @@ struct WorkoutCardView: View {
                 VStack(alignment: .center) {
                     ZStack {
                         Circle()
-                            .fill(Color.white.opacity(0.4))
+                            .fill(Color.gray.opacity(0.9))
                             .frame(width: 70, height: 70)
 
                             

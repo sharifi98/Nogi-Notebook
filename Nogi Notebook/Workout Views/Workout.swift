@@ -45,7 +45,7 @@ extension Workout {
         return (1...count).map { _ in
             let randomName = ["Gi", "NoGi"].randomElement() ?? "NoGi" // Defaults to "NoGi" if for some reason randomElement returns nil
             return Workout(name: randomName,
-                    notes: "",
+                    notes: "Today i got my blue belt",
                     startTime: Date(),
                     endTime: Date().addingTimeInterval(3600),
                     submissions: Int.random(in: 0...5),

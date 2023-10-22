@@ -18,20 +18,29 @@ struct WorkoutView: View {
         formatter.dateFormat = "E, MMM d 'at' HH:mm"
     }
     
+    func format(duration: TimeInterval) -> String {
+        let totalMinutes = Int(duration) / 60
+        return "\(totalMinutes) min"
+    }
+    
     var body: some View {
         VStack {
            VStack {
                 Text("\(workout.name)")
                     .font(.system(size: 66))
                     .bold()
+                   
+            }
+            .glassmorphismBackground(minWidth: 350, maxHeight: 150)
+            
+            VStack {
                 Text(formatter.string(from: workout.startTime))
                     .font(.system(size: 22))
-                    .foregroundStyle(.gray)
+                    
                
-               Text("\(workout.duration)")
-                   .foregroundStyle(.gray)
+               Text(format(duration: workout.duration))
+                   .font(.title)
             }
-            .glassmorphismBackground(minWidth: 350, maxHeight: 140)
             
             
             VStack {
@@ -64,9 +73,25 @@ struct WorkoutView: View {
                 .font(.system(size: 15))
             Text("\(value)")
                 .font(.system(size: 60))
+            HStack {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "chart.bar.xaxis")
+                        .foregroundStyle(.blue)
+                }
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "star.fill")
+                        .foregroundStyle(.blue)
+                }
+            }
+            Spacer()
         }
         .bold()
-        .glassmorphismBackground(minWidth: 170, maxHeight: 150)
+        .glassmorphismBackground(minWidth: 170, maxHeight: 160)
     }
 }
 

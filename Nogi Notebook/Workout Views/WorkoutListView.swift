@@ -38,6 +38,12 @@ struct WorkoutListView: View {
     var body: some View {
         NavigationView {
             ScrollView {
+                
+                VStack {
+                    
+                }
+                
+                
                 VStack {
                     ForEach(workoutStore.workouts.indices.reversed(), id: \.self) { index in
                         HStack {
@@ -73,7 +79,7 @@ struct WorkoutListView: View {
                             showAddTraningView = true
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundStyle(.cyan)
+                                .foregroundStyle(.blue)
                         }
                     }
                     
@@ -84,7 +90,7 @@ struct WorkoutListView: View {
                             }
                         }) {
                             Text(isInEditMode ? "Done" : "Edit")
-                                .foregroundStyle(.cyan)
+                                .foregroundStyle(.blue)
                         }
                     }
                 }
