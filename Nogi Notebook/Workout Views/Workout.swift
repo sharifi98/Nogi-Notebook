@@ -8,17 +8,17 @@
 import Foundation
 
 struct Workout: Identifiable {
-    let id = UUID()
-    let name: String
-    let notes: String
-    let startTime: Date
-    let endTime: Date
-    let submissions: Int
-    let taps: Int
-    let sweeps: Int
-    let takedowns: Int
-    let rounds: Int
-    let roundLength: Int
+    var id = UUID()
+    var name: String
+    var notes: String
+    var startTime: Date
+    var endTime: Date
+    var submissions: Int
+    var taps: Int
+    var sweeps: Int
+    var takedowns: Int
+    var rounds: Int
+    var roundLength: Int
     
     var duration: TimeInterval {
         return endTime.timeIntervalSince(startTime)

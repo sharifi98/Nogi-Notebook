@@ -9,109 +9,125 @@ import SwiftUI
 
 struct WorkoutCardView: View {
     var workout: Workout
-    
+
     public init(workout: Workout) {
         self.workout = workout
     }
-    
+
     func format(duration: TimeInterval) -> String {
         let totalMinutes = Int(duration) / 60
         return "\(totalMinutes) min"
     }
 
-    
     private var dayFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE"
         formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }()
-    
+
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMM"
         formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }()
-    
+
     private var timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }()
-    
-    public var body: some View {
-        VStack {
-            HStack {
-                // Date section
-                VStack(alignment: .center) {
-                    ZStack {
-                        Circle()
-                            .fill(Color.gray.opacity(0.9))
-                            .frame(width: 70, height: 70)
 
-                            
-                        VStack {
-                            Text(dayFormatter.string(from: workout.startTime).prefix(3))
-                                .font(.subheadline)
-                                .bold()
-                                .foregroundStyle(.white)
-                            Text(dateFormatter.string(from: workout.startTime))
-                                .font(.headline)
-                                .bold()
-                                .foregroundColor(.white)
-                        }
+    struct DateSection: View {
+        var workout: Workout
+        var dayFormatter: DateFormatter
+        var dateFormatter: DateFormatter
+
+        var body: some View {
+            VStack(alignment: .center) {
+                ZStack {
+                    Circle()
+                        .fill(Color.gray.opacity(0.9))
+                        .frame(width: 70, height: 70)
+
+                    VStack {
+                        Text(dayFormatter.string(from: workout.startTime).prefix(3))
+                            .font(.subheadline)
+                            .bold()
+                            .foregroundStyle(.white)
+                        Text(dateFormatter.string(from: workout.startTime))
+                            .font(.headline)
+                            .bold()
+                            .foregroundColor(.white)
                     }
-                    Spacer()
                 }
-                .padding(.leading, 10)
-                
-                // Workout details
-                VStack(alignment: .leading) {
-                    Text(workout.name)
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(.white)
-                    Text("• \(workout.rounds) x Rounds")
-                        .foregroundColor(.white)
-                    Text("• \(workout.submissions) x Submissions")
-                        .foregroundColor(.white)
-                    Text("• \(workout.taps) x Taps")
-                        .foregroundColor(.white)
-                    Text("• \(workout.sweeps) x Sweeps")
-                        .foregroundColor(.white)
-                }
-                .padding(.leading, 20)
-                .multilineTextAlignment(.leading)
-
                 Spacer()
-
-                // Duration section
-                VStack(alignment: .trailing) {
-                    Text(format(duration: workout.duration))
-                        .font(.headline)
-                        .foregroundColor(.white)
-                    Spacer()
-                }
-                .padding(.trailing, 10)
             }
-            .padding([.top, .bottom])
-            .frame(minWidth: 350, maxHeight: 150)
-            .background(
-                Color.gray.opacity(0.25) // Soften the background to get that glass effect
-            )
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.white.opacity(0.2), lineWidth: 3) // Subtle white border
-            )
-            .shadow(color: Color.black.opacity(0.1), radius: 5) // Reduced shadow opacity for a softer look
+            .padding(.leading, 10)
         }
     }
 
+    struct WorkoutDetails: View {
+        var workout: Workout
 
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(workout.name)
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(.white)
 
+                ForEach([
+                    ("\(workout.rounds) x Rounds", Color.gray),
+                    ("\(workout.submissions) x Submissions", Color.gray),
+                    ("\(workout.taps) x Taps", Color.gray),
+                    ("\(workout.sweeps) x Sweeps", Color.gray),
+                    ("\(workout.takedowns) x Takedowns", Color.gray)
+                ], id: \.0) { text, color in
+                    Text(text).foregroundColor(color)
+                }
+            }
+            .padding(.leading, 20)
+            .multilineTextAlignment(.leading)
+        }
+    }
+
+    struct DurationSection: View {
+        var duration: TimeInterval
+        var format: (TimeInterval) -> String
+
+        var body: some View {
+            VStack(alignment: .trailing) {
+                Text(format(duration))
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                Spacer()
+            }
+            .padding(.trailing, 10)
+        }
+    }
+
+    public var body: some View {
+        VStack {
+            HStack {
+                DateSection(workout: workout, dayFormatter: dayFormatter, dateFormatter: dateFormatter)
+                WorkoutDetails(workout: workout)
+                Spacer()
+                DurationSection(duration: workout.duration, format: format)
+            }
+            .padding([.top, .bottom])
+            .frame(minWidth: 350, maxHeight: 150)
+            .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.white, lineWidth: 1.5)
+            )
+            .shadow(color: Color.black.opacity(0.1), radius: 5)
+        }
+        .padding(3)
+    }
 }
 
 struct WorkoutCardView_Previews: PreviewProvider {
@@ -120,9 +136,9 @@ struct WorkoutCardView_Previews: PreviewProvider {
             .padding()
             .previewLayout(.sizeThatFits)
     }
-    
+
     static let sampleWorkout = Workout(
-        name: "NoGi", 
+        name: "NoGi",
         notes: "",
         startTime: Date(),
         endTime: Date(),
