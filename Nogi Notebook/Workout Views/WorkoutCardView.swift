@@ -13,7 +13,7 @@ struct WorkoutCardView: View {
     public init(workout: Workout) {
         self.workout = workout
     }
-
+    
     func format(duration: TimeInterval) -> String {
         let totalMinutes = Int(duration) / 60
         return "\(totalMinutes) min"

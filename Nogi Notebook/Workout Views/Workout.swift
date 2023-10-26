@@ -28,7 +28,7 @@ struct Workout: Identifiable {
         return Workout(name: "NoGi",
                        notes: "",
                        startTime: Date(),
-                       endTime: Date(),
+                       endTime: Date()+1,
                        submissions: 5,
                        taps: 2,
                        sweeps: 3,

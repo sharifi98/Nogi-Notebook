@@ -15,9 +15,12 @@
 import SwiftUI
 
 struct WorkoutView2: View {
+    let formatter: DateFormatter
+    
+    @State private var showingStartTimePicker = false
+    @State private var showingEndTimePicker = false
     
     @State var workout: Workout
-    let formatter: DateFormatter
     @State private var subs: String
     @State private var taps: String
     @State private var take: String
@@ -26,10 +29,10 @@ struct WorkoutView2: View {
     
     public init(workout: Workout) {
         self._workout = State(initialValue: workout)
-        self._subs = State(initialValue: "\(workout.submissions)")
-        self._taps = State(initialValue: "\(workout.taps)")
-        self._take = State(initialValue: "\(workout.takedowns)")
-        self._swps = State(initialValue: "\(workout.sweeps)")
+        self._subs = State(initialValue: workout.submissions > 0 ? "\(workout.submissions)" : "0")
+        self._taps = State(initialValue: workout.taps > 0 ? "\(workout.taps)" : "0")
+        self._take = State(initialValue: workout.takedowns > 0 ? "\(workout.takedowns)" : "0")
+        self._swps = State(initialValue: workout.sweeps > 0 ? "\(workout.sweeps)" : "0")
         
         self.formatter = DateFormatter()
         formatter.dateFormat = "E, MMM d 'at' HH:mm"
@@ -42,20 +45,35 @@ struct WorkoutView2: View {
                     .bold()
                 
                 HStack {
-                    NavigationLink(destination: Text("Hello")) {
-                        Text("Start Time")
-                        Spacer()
+                    Text("Start Time")
+                    Spacer()
+                    Button(action: {
+                        showingStartTimePicker = true
+                    }) {
                         Text(formatter.string(from: workout.startTime))
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showingStartTimePicker) {
+                        StartTimePickerView(selectedDate: $workout.startTime)
+                            .presentationDetents([.fraction(0.4)])
                     }
                 }
                 
                 HStack {
-                    NavigationLink(destination: Text("Change endtime")){
-                        Text("End Time")
-                        Spacer()
+                    Text("End Time")
+                    Spacer()
+                    Button(action: {
+                        showingEndTimePicker = true
+                    }) {
                         Text(formatter.string(from: workout.endTime))
+                            .foregroundColor(.blue)
+                    }
+                    .sheet(isPresented: $showingEndTimePicker) {
+                        StartTimePickerView(selectedDate: $workout.endTime)
                     }
                 }
+                
+                
                 
                 HStack {
                     Text("Bodyweight")
@@ -67,23 +85,30 @@ struct WorkoutView2: View {
                 }
             }
             
-            StatSection(title: "Submissions", stringValue: $subs) { value in
-                workout.submissions = value
+            Section(header: Text("Total rounds")) {
+                
+                Text("\(workout.rounds)")
             }
-            
-            StatSection(title: "Taps", stringValue: $taps) { value in
-                workout.taps = value
-            }
-            
-            StatSection(title: "Sweeps", stringValue: $swps) { value in
-                workout.sweeps = value
-            }
-            
-            StatSection(title: "TKD", stringValue: $take) { value in
-                workout.takedowns = value
+            Section(header: Text("Statistics")){
+                
+                StatSection(title: "SUB", stringValue: $subs) { value in
+                    workout.submissions = value
+                }
+                
+                StatSection(title: "TAP", stringValue: $taps) { value in
+                    workout.taps = value
+                }
+                
+                StatSection(title: "SWP", stringValue: $swps) { value in
+                    workout.sweeps = value
+                }
+                
+                StatSection(title: "TKD", stringValue: $take) { value in
+                    workout.takedowns = value
+                }
             }
         }
-        .navigationTitle("Date")
+        .navigationTitle("\(workout.startTime)")
     }
 }
 
@@ -111,31 +136,45 @@ struct WorkoutView2_Previews: PreviewProvider {
 
 
 struct StatSection: View {
+    @FocusState private var isKeyboardFocused: Bool
     let title: String
     @Binding var stringValue: String
     var updateValue: (Int) -> Void
     
     var body: some View {
-        Section {
-            Text(title)
-            VStack(alignment: .leading) {
-                HStack {
-                    TextField("", text: $stringValue, onCommit: {
-                        if let newValue = Int(stringValue) {
-                            updateValue(newValue)
+        VStack(alignment: .leading) {
+            HStack {
+                Text(title)
+                TextField("", text: $stringValue, onCommit: {
+                    if let newValue = Int(stringValue) {
+                        updateValue(newValue)
+                    }
+                })
+                .focused($isKeyboardFocused)
+                .keyboardType(.numberPad)
+                .toolbar {
+                    // Show the Done button only when this specific TextField is focused
+                    if isKeyboardFocused {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Done") {
+                                isKeyboardFocused = false
+                            }
                         }
-                    })
-                    Button(action: {}) {
-                        Image(systemName: "chart.bar.xaxis")
-                            .foregroundStyle(.blue)
                     }
-                    
-                    Button(action: {}) {
-                        Image(systemName: "star.fill")
-                            .foregroundStyle(.blue)
-                    }
+                }
+                Button(action: {}) {
+                    Image(systemName: "chart.bar.xaxis")
+                        .foregroundStyle(.blue)
+                }
+                
+                Button(action: {}) {
+                    Image(systemName: "star.fill")
+                        .foregroundStyle(.blue)
                 }
             }
         }
     }
 }
+
+

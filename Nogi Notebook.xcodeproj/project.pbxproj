@@ -23,6 +23,8 @@
 		036CBBB02ABDE2610074F2BE /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAF2ABDE2610074F2BE /* Workout.swift */; };
 		036CBBB22ABDE3300074F2BE /* WorkoutStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */; };
 		03F01C452AE4057E00C55FB2 /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F01C442AE4057E00C55FB2 /* WorkoutListView.swift */; };
+		03F3D9102AEAEED2009074BC /* StartTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3D90F2AEAEED2009074BC /* StartTimePickerView.swift */; };
+		03F3D9122AEAEFD6009074BC /* EndTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3D9112AEAEFD6009074BC /* EndTimePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		036CBBAF2ABDE2610074F2BE /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStore.swift; sourceTree = "<group>"; };
 		03F01C442AE4057E00C55FB2 /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
+		03F3D90F2AEAEED2009074BC /* StartTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimePickerView.swift; sourceTree = "<group>"; };
+		03F3D9112AEAEFD6009074BC /* EndTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 				03F01C442AE4057E00C55FB2 /* WorkoutListView.swift */,
 				032446DE2ACF32C600DDADDA /* WorkoutCardView.swift */,
 				035467A52AE984B7006DFC7B /* WorkoutView2.swift */,
+				03F3D90F2AEAEED2009074BC /* StartTimePickerView.swift */,
+				03F3D9112AEAEFD6009074BC /* EndTimePickerView.swift */,
 				036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */,
 				032446E02ACF39DC00DDADDA /* DateAndTimePicker.swift */,
 				036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */,
@@ -184,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F3D9102AEAEED2009074BC /* StartTimePickerView.swift in Sources */,
 				03F01C452AE4057E00C55FB2 /* WorkoutListView.swift in Sources */,
 				033D5FFB2ADEB98700A2E903 /* GlassmorphismBackground.swift in Sources */,
 				036CBBAE2ABDBFE40074F2BE /* AddTraningView.swift in Sources */,
@@ -196,6 +203,7 @@
 				032446DF2ACF32C600DDADDA /* WorkoutCardView.swift in Sources */,
 				036CBBB22ABDE3300074F2BE /* WorkoutStore.swift in Sources */,
 				036CBBAC2ABDB9D60074F2BE /* SubmissionDetailView.swift in Sources */,
+				03F3D9122AEAEFD6009074BC /* EndTimePickerView.swift in Sources */,
 				036CBB972ABDB3D00074F2BE /* Nogi_NotebookApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +334,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nogi Notebook/Preview Content\"";
+				DEVELOPMENT_TEAM = WP99484WGY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -362,6 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nogi Notebook/Preview Content\"";
+				DEVELOPMENT_TEAM = WP99484WGY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

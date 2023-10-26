@@ -37,12 +37,8 @@ struct WorkoutListView: View {
     
     var body: some View {
         NavigationView {
+            
             ScrollView {
-                
-                VStack {
-                    
-                }
-                
                 
                 VStack {
                     ForEach(workoutStore.workouts.indices.reversed(), id: \.self) { index in
