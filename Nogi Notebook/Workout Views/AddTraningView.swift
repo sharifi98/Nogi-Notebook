@@ -45,12 +45,12 @@ struct AddTraningView: View {
     @State private var taps = 0
     @State private var sweeps = 0
     @State private var takedowns = 0
-    @State private var rounds: Int = 1
+    @State private var rounds: Double = 0
     @State private var roundLength: Int = 5
 
     // MARK: - Computed Properties
     private var workoutSummary: Int {
-        return rounds * roundLength
+        return Int(rounds) * roundLength
     }
     
     var body: some View {
@@ -108,18 +108,24 @@ struct AddTraningView: View {
     
     private var roundsSection: some View {
         Section {
-            Text("Rounds rolled")
-            Picker("Rounds rolled", selection: $rounds) {
-                ForEach(roundsRange, id: \.self) { number in
-                    Text("\(number)").tag(number)
-                        .rotationEffect(Angle(degrees: 90))
-
+            
+            
+            
+            VStack{
+                HStack{
+                    Text("Rounds Rolled:")
+                    Text(String(format: "%1.f", rounds))
                     
                 }
+                Slider(value: $rounds, in: 0...20, step: 1) {
+                    Text("Rounds")
+                } minimumValueLabel: {
+                    Text("0")
+                } maximumValueLabel: {
+                    Text("20")
+                }
             }
-            .rotationEffect(Angle(degrees: -90))
-            .pickerStyle(.wheel)
-            .frame(height: 150)
+
         }
     }
     
@@ -158,7 +164,7 @@ struct AddTraningView: View {
                                              taps: taps,
                                              sweeps: sweeps,
                                              takedowns: takedowns,
-                                             rounds: rounds,
+                                             rounds: Int(rounds),
                                              roundLength: roundLength)
                     
                     workoutStore.add(workout: newWorkout)
