@@ -55,7 +55,7 @@ struct WorkoutListView: View {
                                 }
                             }
                             
-                            NavigationLink(destination: WorkoutView2(workout: workoutStore.workouts[index])) {
+                            NavigationLink(destination: FinishedWorkoutView(workout: workoutStore.workouts[index])) {
                                 WorkoutCardView(workout: workoutStore.workouts[index])
                             }
                             .contextMenu(ContextMenu(menuItems: {

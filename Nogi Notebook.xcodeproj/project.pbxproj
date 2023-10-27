@@ -10,7 +10,7 @@
 		032446DF2ACF32C600DDADDA /* WorkoutCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032446DE2ACF32C600DDADDA /* WorkoutCardView.swift */; };
 		032446E12ACF39DC00DDADDA /* DateAndTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032446E02ACF39DC00DDADDA /* DateAndTimePicker.swift */; };
 		033D5FFB2ADEB98700A2E903 /* GlassmorphismBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033D5FFA2ADEB98700A2E903 /* GlassmorphismBackground.swift */; };
-		035467A62AE984B7006DFC7B /* WorkoutView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035467A52AE984B7006DFC7B /* WorkoutView2.swift */; };
+		035467A62AE984B7006DFC7B /* FinishedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035467A52AE984B7006DFC7B /* FinishedWorkoutView.swift */; };
 		036CBB972ABDB3D00074F2BE /* Nogi_NotebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBB962ABDB3D00074F2BE /* Nogi_NotebookApp.swift */; };
 		036CBB992ABDB3D00074F2BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBB982ABDB3D00074F2BE /* ContentView.swift */; };
 		036CBB9B2ABDB3D20074F2BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036CBB9A2ABDB3D20074F2BE /* Assets.xcassets */; };
@@ -32,7 +32,7 @@
 		032446DE2ACF32C600DDADDA /* WorkoutCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutCardView.swift; sourceTree = "<group>"; };
 		032446E02ACF39DC00DDADDA /* DateAndTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimePicker.swift; sourceTree = "<group>"; };
 		033D5FFA2ADEB98700A2E903 /* GlassmorphismBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassmorphismBackground.swift; sourceTree = "<group>"; };
-		035467A52AE984B7006DFC7B /* WorkoutView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutView2.swift; sourceTree = "<group>"; };
+		035467A52AE984B7006DFC7B /* FinishedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedWorkoutView.swift; sourceTree = "<group>"; };
 		036CBB932ABDB3D00074F2BE /* Nogi Notebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nogi Notebook.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		036CBB962ABDB3D00074F2BE /* Nogi_NotebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nogi_NotebookApp.swift; sourceTree = "<group>"; };
 		036CBB982ABDB3D00074F2BE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 			children = (
 				03F01C442AE4057E00C55FB2 /* WorkoutListView.swift */,
 				032446DE2ACF32C600DDADDA /* WorkoutCardView.swift */,
-				035467A52AE984B7006DFC7B /* WorkoutView2.swift */,
+				035467A52AE984B7006DFC7B /* FinishedWorkoutView.swift */,
 				03F3D90F2AEAEED2009074BC /* StartTimePickerView.swift */,
 				03F3D9112AEAEFD6009074BC /* EndTimePickerView.swift */,
 				036CBBAD2ABDBFE40074F2BE /* AddTraningView.swift */,
@@ -203,7 +203,7 @@
 				03F0C14F2AEBBFC60083ED97 /* MaterialView.swift in Sources */,
 				036CBBAA2ABDB63B0074F2BE /* Submission.swift in Sources */,
 				036CBB992ABDB3D00074F2BE /* ContentView.swift in Sources */,
-				035467A62AE984B7006DFC7B /* WorkoutView2.swift in Sources */,
+				035467A62AE984B7006DFC7B /* FinishedWorkoutView.swift in Sources */,
 				032446DF2ACF32C600DDADDA /* WorkoutCardView.swift in Sources */,
 				036CBBB22ABDE3300074F2BE /* WorkoutStore.swift in Sources */,
 				036CBBAC2ABDB9D60074F2BE /* SubmissionDetailView.swift in Sources */,

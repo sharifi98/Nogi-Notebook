@@ -15,7 +15,7 @@
 
 import SwiftUI
 
-struct WorkoutView2: View {
+struct FinishedWorkoutView: View {
     // MARK: - Properties
     let formatter: DateFormatter
     @State var workout: Workout
@@ -65,7 +65,9 @@ struct WorkoutView2: View {
     private var totalRoundsSection: some View {
         Section(header: Text("Total rounds")) {
             Text("\(workout.rounds)")
+                .foregroundStyle(.black)
         }
+        .listRowBackground(Color.white)
     }
     
     private var statisticsSection: some View {
@@ -75,6 +77,7 @@ struct WorkoutView2: View {
             StatSection(title: "SWP", stringValue: $swps) { workout.sweeps = $0 }
             StatSection(title: "TKD", stringValue: $take) { workout.takedowns = $0 }
         }
+        .listRowBackground(Color.white)
     }
     
     private func timeSelectionRow(title: String, showingPicker: Binding<Bool>, time: Binding<Date>) -> some View {
@@ -147,7 +150,7 @@ struct StatSection: View {
 // MARK: - Previews
 struct WorkoutView2_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutView2(workout: sampleWorkout)
+        FinishedWorkoutView(workout: sampleWorkout)
             .padding()
             .previewLayout(.sizeThatFits)
     }
