@@ -10,8 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        VStack {
+        TabView {
             WorkoutListView()
+                .tabItem {
+                    Label("Log", systemImage: "clock.arrow.circlepath")
+                }
+            SubmissionListView()
+                .tabItem {
+                    Label("Submissions", systemImage: "list.bullet")
+                }
         }
     }
 }
