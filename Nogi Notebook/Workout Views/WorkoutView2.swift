@@ -12,21 +12,21 @@
 //  Created by Hossein Sharifi on 17/10/2023.
 //
 
+
 import SwiftUI
 
 struct WorkoutView2: View {
+    // MARK: - Properties
     let formatter: DateFormatter
-    
-    @State private var showingStartTimePicker = false
-    @State private var showingEndTimePicker = false
-    
     @State var workout: Workout
     @State private var subs: String
     @State private var taps: String
     @State private var take: String
     @State private var swps: String
+    @State private var showingStartTimePicker = false
+    @State private var showingEndTimePicker = false
     
-    
+    // MARK: - Initializers
     public init(workout: Workout) {
         self._workout = State(initialValue: workout)
         self._subs = State(initialValue: workout.submissions > 0 ? "\(workout.submissions)" : "0")
@@ -38,80 +38,113 @@ struct WorkoutView2: View {
         formatter.dateFormat = "E, MMM d 'at' HH:mm"
     }
     
+    // MARK: - Body
     var body: some View {
         List {
-            Section {
-                Text("\(workout.name)")
-                    .bold()
-                
-                HStack {
-                    Text("Start Time")
-                    Spacer()
-                    Button(action: {
-                        showingStartTimePicker = true
-                    }) {
-                        Text(formatter.string(from: workout.startTime))
-                            .foregroundColor(.blue)
-                    }
-                    .sheet(isPresented: $showingStartTimePicker) {
-                        StartTimePickerView(selectedDate: $workout.startTime)
-                            .presentationDetents([.fraction(0.4)])
-                    }
-                }
-                
-                HStack {
-                    Text("End Time")
-                    Spacer()
-                    Button(action: {
-                        showingEndTimePicker = true
-                    }) {
-                        Text(formatter.string(from: workout.endTime))
-                            .foregroundColor(.blue)
-                    }
-                    .sheet(isPresented: $showingEndTimePicker) {
-                        StartTimePickerView(selectedDate: $workout.endTime)
-                    }
-                }
-                
-                
-                
-                HStack {
-                    Text("Bodyweight")
-                }
-                
-                HStack {
-                    Text("Notes")
-                    Text(workout.notes)
-                }
-            }
-            
-            Section(header: Text("Total rounds")) {
-                
-                Text("\(workout.rounds)")
-            }
-            Section(header: Text("Statistics")){
-                
-                StatSection(title: "SUB", stringValue: $subs) { value in
-                    workout.submissions = value
-                }
-                
-                StatSection(title: "TAP", stringValue: $taps) { value in
-                    workout.taps = value
-                }
-                
-                StatSection(title: "SWP", stringValue: $swps) { value in
-                    workout.sweeps = value
-                }
-                
-                StatSection(title: "TKD", stringValue: $take) { value in
-                    workout.takedowns = value
-                }
-            }
+            workoutDetailsSection
+            totalRoundsSection
+            statisticsSection
         }
         .navigationTitle("\(workout.startTime)")
+        .listRowBackground(Color.white)
+    }
+    
+    private var workoutDetailsSection: some View {
+        Section {
+            Text("\(workout.name)").bold()
+            timeSelectionRow(title: "Start Time", showingPicker: $showingStartTimePicker, time: $workout.startTime)
+            timeSelectionRow(title: "End Time", showingPicker: $showingEndTimePicker, time: $workout.endTime)
+            Text("Bodyweight")
+            HStack {
+                Text("Notes")
+                Text(workout.notes)
+            }
+        }
+    }
+    
+    private var totalRoundsSection: some View {
+        Section(header: Text("Total rounds")) {
+            Text("\(workout.rounds)")
+        }
+    }
+    
+    private var statisticsSection: some View {
+        Section(header: Text("Statistics")) {
+            StatSection(title: "SUB", stringValue: $subs) { workout.submissions = $0 }
+            StatSection(title: "TAP", stringValue: $taps) { workout.taps = $0 }
+            StatSection(title: "SWP", stringValue: $swps) { workout.sweeps = $0 }
+            StatSection(title: "TKD", stringValue: $take) { workout.takedowns = $0 }
+        }
+    }
+    
+    private func timeSelectionRow(title: String, showingPicker: Binding<Bool>, time: Binding<Date>) -> some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Button(action: {
+                showingPicker.wrappedValue = true
+            }) {
+                Text(formatter.string(from: time.wrappedValue))
+                    .foregroundColor(.blue)
+            }
+            .sheet(isPresented: showingPicker) {
+                StartTimePickerView(selectedDate: time)
+            }
+        }
     }
 }
 
+// MARK: - StatSection
+struct StatSection: View {
+    @FocusState private var isKeyboardFocused: Bool
+    let title: String
+    @Binding var stringValue: String
+    var updateValue: (Int) -> Void
+    
+    private var intValue: Int { Int(stringValue) ?? 0 }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text(title).foregroundStyle(.black)
+                
+                TextField("", text: $stringValue, onCommit: {
+                    if let newValue = Int(stringValue) {
+                        updateValue(newValue)
+                    }
+                })
+                .foregroundStyle(.black)
+                .focused($isKeyboardFocused)
+                .keyboardType(.numberPad)
+                .toolbar {
+                    if isKeyboardFocused {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("Done") { isKeyboardFocused = false }
+                        }
+                    }
+                }
+                
+                Stepper(value: Binding(get: { self.intValue }, set: { newValue in
+                    stringValue = "\(newValue)"
+                    updateValue(newValue)
+                }), in: 0...50) {
+                    Text("\(intValue)")
+                }
+                
+                Button(action: {}) {
+                    Image(systemName: "chart.bar.xaxis").foregroundStyle(.blue)
+                }
+                
+                Button(action: {}) {
+                    Image(systemName: "star.fill").foregroundStyle(.blue)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Previews
 struct WorkoutView2_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutView2(workout: sampleWorkout)
@@ -132,49 +165,3 @@ struct WorkoutView2_Previews: PreviewProvider {
         roundLength: 6
     )
 }
-
-
-
-struct StatSection: View {
-    @FocusState private var isKeyboardFocused: Bool
-    let title: String
-    @Binding var stringValue: String
-    var updateValue: (Int) -> Void
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(title)
-                TextField("", text: $stringValue, onCommit: {
-                    if let newValue = Int(stringValue) {
-                        updateValue(newValue)
-                    }
-                })
-                .focused($isKeyboardFocused)
-                .keyboardType(.numberPad)
-                .toolbar {
-                    // Show the Done button only when this specific TextField is focused
-                    if isKeyboardFocused {
-                        ToolbarItemGroup(placement: .keyboard) {
-                            Spacer()
-                            Button("Done") {
-                                isKeyboardFocused = false
-                            }
-                        }
-                    }
-                }
-                Button(action: {}) {
-                    Image(systemName: "chart.bar.xaxis")
-                        .foregroundStyle(.blue)
-                }
-                
-                Button(action: {}) {
-                    Image(systemName: "star.fill")
-                        .foregroundStyle(.blue)
-                }
-            }
-        }
-    }
-}
-
-
