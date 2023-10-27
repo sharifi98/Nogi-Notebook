@@ -75,7 +75,7 @@ struct WorkoutListView: View {
                             showAddTraningView = true
                         } label: {
                             Image(systemName: "plus.circle")
-                                .foregroundStyle(.blue)
+                                .foregroundStyle(.white)
                         }
                     }
                     
@@ -86,7 +86,7 @@ struct WorkoutListView: View {
                             }
                         }) {
                             Text(isInEditMode ? "Done" : "Edit")
-                                .foregroundStyle(.blue)
+                                .foregroundStyle(.white)
                         }
                     }
                 }
@@ -95,6 +95,7 @@ struct WorkoutListView: View {
                         .environmentObject(workoutStore)
                 }
             }
+            .navigationTitle("Log")
         }
     }
 }

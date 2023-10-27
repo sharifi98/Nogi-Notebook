@@ -23,6 +23,7 @@
 		036CBBB02ABDE2610074F2BE /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBAF2ABDE2610074F2BE /* Workout.swift */; };
 		036CBBB22ABDE3300074F2BE /* WorkoutStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */; };
 		03F01C452AE4057E00C55FB2 /* WorkoutListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F01C442AE4057E00C55FB2 /* WorkoutListView.swift */; };
+		03F0C14F2AEBBFC60083ED97 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F0C14E2AEBBFC60083ED97 /* MaterialView.swift */; };
 		03F3D9102AEAEED2009074BC /* StartTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3D90F2AEAEED2009074BC /* StartTimePickerView.swift */; };
 		03F3D9122AEAEFD6009074BC /* EndTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3D9112AEAEFD6009074BC /* EndTimePickerView.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		036CBBAF2ABDE2610074F2BE /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		036CBBB12ABDE3300074F2BE /* WorkoutStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStore.swift; sourceTree = "<group>"; };
 		03F01C442AE4057E00C55FB2 /* WorkoutListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListView.swift; sourceTree = "<group>"; };
+		03F0C14E2AEBBFC60083ED97 /* MaterialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
 		03F3D90F2AEAEED2009074BC /* StartTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimePickerView.swift; sourceTree = "<group>"; };
 		03F3D9112AEAEFD6009074BC /* EndTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTimePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +89,7 @@
 				036CBBAB2ABDB9D60074F2BE /* SubmissionDetailView.swift */,
 				036CBBA92ABDB63B0074F2BE /* Submission.swift */,
 				033D5FFA2ADEB98700A2E903 /* GlassmorphismBackground.swift */,
+				03F0C14E2AEBBFC60083ED97 /* MaterialView.swift */,
 				036CBBA72ABDB6230074F2BE /* submissions.json */,
 				036CBB9A2ABDB3D20074F2BE /* Assets.xcassets */,
 				036CBB9C2ABDB3D20074F2BE /* Nogi_Notebook.entitlements */,
@@ -197,6 +200,7 @@
 				036CBBA62ABDB5A30074F2BE /* SubmissionListView.swift in Sources */,
 				032446E12ACF39DC00DDADDA /* DateAndTimePicker.swift in Sources */,
 				036CBBB02ABDE2610074F2BE /* Workout.swift in Sources */,
+				03F0C14F2AEBBFC60083ED97 /* MaterialView.swift in Sources */,
 				036CBBAA2ABDB63B0074F2BE /* Submission.swift in Sources */,
 				036CBB992ABDB3D00074F2BE /* ContentView.swift in Sources */,
 				035467A62AE984B7006DFC7B /* WorkoutView2.swift in Sources */,
