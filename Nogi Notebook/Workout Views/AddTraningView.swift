@@ -29,10 +29,11 @@ struct AddTraningView: View {
         formatter.locale = Locale(identifier: "en_GB")
         return formatter
     }
-
+    
     
     @Environment(\.dismiss) var dismiss
     @Binding var showAddTraningView: Bool
+    @FocusState private var isInputActive: Bool
     
     var workoutType = ["Gi", "NoGi"]
     @State var selectedWorkoutName = "Gi"
@@ -47,7 +48,8 @@ struct AddTraningView: View {
     @State private var takedowns = 0
     @State private var rounds: Double = 0
     @State private var roundLength: Int = 5
-
+    
+    
     // MARK: - Computed Properties
     private var workoutSummary: Int {
         return Int(rounds) * roundLength
@@ -90,12 +92,24 @@ struct AddTraningView: View {
     
     private var notesSection: some View {
         TextField("Notes", text: $notes)
+            .keyboardType(.default)
+            .focused($isInputActive)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    HStack {
+                        Spacer()
+                        Button("Done") {
+                            isInputActive = false
+                        }
+                    }
+                }
+            }
     }
     
     private var headerSection: some View {
         DateAndTimePicker(selectedDate: $startTime, selectedTime: $endTime)
     }
-
+    
     
     private var statsSection: some View {
         Section {
@@ -125,7 +139,7 @@ struct AddTraningView: View {
                     Text("20")
                 }
             }
-
+            
         }
     }
     
@@ -156,7 +170,7 @@ struct AddTraningView: View {
         Group {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    let newWorkout = Workout(name: selectedWorkoutName, 
+                    let newWorkout = Workout(name: selectedWorkoutName,
                                              notes: notes,
                                              startTime: startTime,
                                              endTime: endTime,
@@ -184,7 +198,7 @@ struct AddTraningView: View {
             }
         }
     }
-
+    
     
     private func statStepper(title: String, value: Binding<Int>) -> some View {
         HStack {
