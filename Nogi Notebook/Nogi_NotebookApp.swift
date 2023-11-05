@@ -16,7 +16,6 @@ struct NogiNotebookApp: App {
             let sampleWorkouts = Workout.generateSampleWorkouts(count: 10)
             let workoutStore = WorkoutStore(workouts: sampleWorkouts)
             ContentView().environmentObject(workoutStore)
-                .preferredColorScheme(.dark)
         }
     }
 }

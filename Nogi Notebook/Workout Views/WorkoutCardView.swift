@@ -54,12 +54,17 @@ struct WorkoutCardView: View {
             }
             .padding([.top, .bottom])
             .frame(minWidth: 350, maxHeight: 150)
+            .background(Color.white) // Playing cards are typically white
             .cornerRadius(10)
-
-            .background(.white).cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 0.5) // Add a border line to mimic the edge of a card
+            )
+            .shadow(color: .gray, radius: 5, x: 0, y: 2) // A subtle shadow to give a 3D effect
         }
         .padding(3)
-    }
+        .background(Color.gray.opacity(0.2)) // A slight backdrop shadow for more depth
+}
 
     // MARK: - Subviews
     struct DateSection: View {
@@ -99,7 +104,7 @@ struct WorkoutCardView: View {
                 Text(workout.name)
                     .font(.title2)
                     .bold()
-                    .foregroundColor(.black)
+                    .foregroundStyle(.black)
 
                 ForEach([
                     ("\(workout.rounds) x Rounds", Color.gray),
