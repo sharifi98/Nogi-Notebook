@@ -45,7 +45,7 @@ struct FinishedWorkoutView: View {
             totalRoundsSection
             statisticsSection
         }
-        .navigationTitle("\(workout.startTime)")
+        .navigationTitle("\(workout.name)")
         .listRowBackground(Color.white)
     }
     
@@ -144,6 +144,7 @@ struct StatSection: View {
                 }
             }
         }
+        
     }
 }
 
