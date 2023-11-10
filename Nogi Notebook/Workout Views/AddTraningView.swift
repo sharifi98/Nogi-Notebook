@@ -14,11 +14,7 @@ import SwiftUI
 
 struct AddTraningView: View {
     
-    // array of random work
-    
-    
     @EnvironmentObject var workoutStore: WorkoutStore
-    
     
     private let roundsRange = 1...20
     private let roundLengthRange = 1...8
@@ -30,7 +26,6 @@ struct AddTraningView: View {
         return formatter
     }
     
-    
     @Environment(\.dismiss) var dismiss
     @Binding var showAddTraningView: Bool
     @FocusState private var isInputActive: Bool
@@ -41,13 +36,18 @@ struct AddTraningView: View {
     @State private var name = ""
     @State private var notes = ""
     @State private var startTime = Date()
-    @State private var endTime = Date()
+    @State private var endTime = Date().addingTimeInterval(3600)
+    @State private var bodyWeight: Double = 80.0
+    @State private var bodyWeightText: String = ""
+    
     @State private var submissions = 0
     @State private var taps = 0
     @State private var sweeps = 0
     @State private var takedowns = 0
+    
     @State private var rounds: Double = 0
     @State private var roundLength: Int = 5
+    
     
     
     // MARK: - Computed Properties
@@ -59,9 +59,12 @@ struct AddTraningView: View {
         NavigationStack {
             List {
                 nameSection
-                headerSection
+                timeSection
+                weightSection
                 notesSection
+                
                 statsSection
+                
                 roundsSection
                 roundLengthSection
             }
@@ -90,6 +93,43 @@ struct AddTraningView: View {
         
     }
     
+    private var weightSection: some View {
+        DisclosureGroup("Bodyweight") {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Bodyweight")
+                        .foregroundColor(.gray)
+                    Spacer()
+                    TextField("Enter weight", text: $bodyWeightText)
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                        .focused($isInputActive) // Add this line
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                Button("Done") {
+                                    isInputActive = false // Ensure this sets the focus state to false
+                                }
+                            }
+                        }
+                        .onAppear {
+                            bodyWeightText = String(format: "%.1f", bodyWeight)
+                        }
+                        .onChange(of: bodyWeightText) { newValue in
+                            if let value = Double(newValue) {
+                                bodyWeight = value
+                            }
+                        }
+                }
+                .padding()
+            }
+        }
+        .accentColor(.black)
+        .foregroundColor(.black)
+    }
+
+
+    
     private var notesSection: some View {
         TextField("Notes", text: $notes)
             .keyboardType(.default)
@@ -106,8 +146,9 @@ struct AddTraningView: View {
             }
     }
     
-    private var headerSection: some View {
-        DateAndTimePicker(selectedDate: $startTime, selectedTime: $endTime)
+    private var timeSection: some View {
+        DateAndTimePicker(selectedStartDateAndTime: $startTime, selectedEndDateAndTime: $endTime)
+        
     }
     
     
@@ -122,8 +163,6 @@ struct AddTraningView: View {
     
     private var roundsSection: some View {
         Section {
-            
-            
             
             VStack{
                 HStack{
@@ -179,7 +218,8 @@ struct AddTraningView: View {
                                              sweeps: sweeps,
                                              takedowns: takedowns,
                                              rounds: Int(rounds),
-                                             roundLength: roundLength)
+                                             roundLength: roundLength,
+                                             bodyWeight: bodyWeight)
                     
                     workoutStore.add(workout: newWorkout)
                     dismiss()

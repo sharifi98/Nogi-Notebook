@@ -58,12 +58,11 @@ struct WorkoutCardView: View {
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 0.5) // Add a border line to mimic the edge of a card
+                    .stroke(Color.gray, lineWidth: 0.5)
             )
-            .shadow(color: .gray, radius: 5, x: 0, y: 2) // A subtle shadow to give a 3D effect
+            //.shadow(color: .gray, radius: 5, x: 0, y: 2) // A subtle shadow to give a 3D effect
         }
         .padding(3)
-        .background(Color.gray.opacity(0.2)) // A slight backdrop shadow for more depth
 }
 
     // MARK: - Subviews
@@ -107,13 +106,14 @@ struct WorkoutCardView: View {
                     .foregroundStyle(.black)
 
                 ForEach([
-                    ("\(workout.rounds) x Rounds", Color.gray),
-                    ("\(workout.submissions) x Submissions", Color.gray),
-                    ("\(workout.taps) x Taps", Color.gray),
-                    ("\(workout.sweeps) x Sweeps", Color.gray),
-                    ("\(workout.takedowns) x Takedowns", Color.gray)
+                    ("\(workout.rounds) x Rounds", Color.black),
+                    ("\(workout.submissions) x Submissions", Color.black),
+                    ("\(workout.taps) x Taps", Color.black),
+                    ("\(workout.sweeps) x Sweeps", Color.black),
+                    ("\(workout.takedowns) x Takedowns", Color.black)
                 ], id: \.0) { text, color in
                     Text(text).foregroundColor(color)
+                        .font(.subheadline)
                 }
             }
             .padding(.leading, 20)
@@ -155,6 +155,7 @@ struct WorkoutCardView_Previews: PreviewProvider {
         sweeps: 4,
         takedowns: 3,
         rounds: 5,
-        roundLength: 6
+        roundLength: 6,
+        bodyWeight: 80.0
     )
 }

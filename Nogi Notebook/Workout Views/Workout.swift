@@ -19,6 +19,7 @@ struct Workout: Identifiable {
     var takedowns: Int
     var rounds: Int
     var roundLength: Int
+    var bodyWeight: Double
     
     var duration: TimeInterval {
         return endTime.timeIntervalSince(startTime)
@@ -34,10 +35,11 @@ struct Workout: Identifiable {
                        sweeps: 3,
                        takedowns: 2,
                        rounds: 4,
-                       roundLength: 6)
+                       roundLength: 6,
+                       bodyWeight: 0.0)
     }
-
-
+    
+    
 }
 
 extension Workout {
@@ -45,15 +47,16 @@ extension Workout {
         return (1...count).map { _ in
             let randomName = ["Gi", "NoGi"].randomElement() ?? "NoGi" // Defaults to "NoGi" if for some reason randomElement returns nil
             return Workout(name: randomName,
-                    notes: "Today i got my blue belt",
-                    startTime: Date(),
-                    endTime: Date().addingTimeInterval(3600),
-                    submissions: Int.random(in: 0...5),
-                    taps: Int.random(in: 0...2),
-                    sweeps: Int.random(in: 0...4),
-                    takedowns: Int.random(in: 0...4),
-                    rounds: Int.random(in: 3...6),
-                    roundLength: 6)
+                           notes: "Today i got my blue belt",
+                           startTime: Date(),
+                           endTime: Date().addingTimeInterval(3600),
+                           submissions: Int.random(in: 0...5),
+                           taps: Int.random(in: 0...2),
+                           sweeps: Int.random(in: 0...4),
+                           takedowns: Int.random(in: 0...4),
+                           rounds: Int.random(in: 3...6),
+                           roundLength: 6,
+                           bodyWeight: 80.0)
         }
     }
 }

@@ -12,35 +12,22 @@ struct DateAndTimePicker: View {
         case date, time
     }
     
-    @Binding var selectedDate: Date
-    @Binding var selectedTime: Date
-    @State private var mode: PickerMode = .date
-
+    @Binding var selectedStartDateAndTime: Date
+    @Binding var selectedEndDateAndTime: Date
+    
     var body: some View {
-        VStack(spacing: 20) {
-            Picker("Select Mode", selection: $mode) {
-                Text("Date").tag(PickerMode.date)
-                Text("Time").tag(PickerMode.time)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-
-            if mode == .date {
-                DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
-                    .environment(\.locale, Locale(identifier: "en_GB"))
-            } else {
-                DatePicker("Select Time", selection: $selectedTime, displayedComponents: .hourAndMinute)
-                    .environment(\.locale, Locale(identifier: "en_GB"))
-            }
-        }
+            DatePicker("Start", selection: $selectedStartDateAndTime)
+            DatePicker("End", selection: $selectedEndDateAndTime)
+        
     }
 }
 
 struct DateAndTimePicker_Previews: PreviewProvider {
     @State static var previewDate = Date()
     @State static var previewTime = Date()
-
+    
     static var previews: some View {
-        DateAndTimePicker(selectedDate: $previewDate, selectedTime: $previewTime)
+        DateAndTimePicker(selectedStartDateAndTime: $previewDate, selectedEndDateAndTime: $previewTime)
     }
 }
 

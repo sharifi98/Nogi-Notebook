@@ -17,44 +17,61 @@ import SwiftUI
 
 struct FinishedWorkoutView: View {
     // MARK: - Properties
-    let formatter: DateFormatter
-    @State var workout: Workout
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E, MMM d 'at' HH:mm"
+        return formatter
+    }()
+    
+    @State private var workout: Workout
+    @State private var startTime = Date()
+    @State private var endTime = Date()
     @State private var subs: String
     @State private var taps: String
     @State private var take: String
     @State private var swps: String
+    @State private var bodyWeight: Double
     @State private var showingStartTimePicker = false
     @State private var showingEndTimePicker = false
     
     // MARK: - Initializers
-    public init(workout: Workout) {
-        self._workout = State(initialValue: workout)
-        self._subs = State(initialValue: workout.submissions > 0 ? "\(workout.submissions)" : "0")
-        self._taps = State(initialValue: workout.taps > 0 ? "\(workout.taps)" : "0")
-        self._take = State(initialValue: workout.takedowns > 0 ? "\(workout.takedowns)" : "0")
-        self._swps = State(initialValue: workout.sweeps > 0 ? "\(workout.sweeps)" : "0")
-        
-        self.formatter = DateFormatter()
-        formatter.dateFormat = "E, MMM d 'at' HH:mm"
+    init(workout: Workout) {
+        _workout = State(initialValue: workout)
+        _subs = State(initialValue: String(workout.submissions))
+        _taps = State(initialValue: String(workout.taps))
+        _take = State(initialValue: String(workout.takedowns))
+        _swps = State(initialValue: String(workout.sweeps))
+        _bodyWeight = (State(initialValue: Double(workout.bodyWeight)))
     }
     
     // MARK: - Body
     var body: some View {
-        List {
-            workoutDetailsSection
-            totalRoundsSection
-            statisticsSection
-        }
-        .navigationTitle("\(workout.name)")
-        .listRowBackground(Color.white)
+            List {
+                workoutDetailsSection
+                totalRoundsSection
+                statisticsSection
+            }
+            .navigationTitle(workout.name)
+            .listRowBackground(Color.white)
+        
     }
-    
+}
+
+// MARK: - View Components
+extension FinishedWorkoutView {
     private var workoutDetailsSection: some View {
         Section {
-            Text("\(workout.name)").bold()
-            timeSelectionRow(title: "Start Time", showingPicker: $showingStartTimePicker, time: $workout.startTime)
-            timeSelectionRow(title: "End Time", showingPicker: $showingEndTimePicker, time: $workout.endTime)
-            Text("Bodyweight")
+            Text(workout.name).bold()
+            //timeSelectionRow(title: "Start Time", showingPicker: $showingStartTimePicker, time: $workout.startTime)
+            //timeSelectionRow(title: "End Time", showingPicker: $showingEndTimePicker, time: $workout.endTime)
+            timeSection
+            NavigationLink(destination: Text("80KG")) {
+                Text("Bodyweight")
+            }
+            
+            Stepper("Bodyweight", value: $bodyWeight)
+                
+            
             HStack {
                 Text("Notes")
                 Text(workout.notes)
@@ -64,29 +81,25 @@ struct FinishedWorkoutView: View {
     
     private var totalRoundsSection: some View {
         Section(header: Text("Total rounds")) {
-            Text("\(workout.rounds)")
+            Text(String(workout.rounds))
                 .foregroundStyle(.black)
         }
-        .listRowBackground(Color.white)
     }
     
     private var statisticsSection: some View {
         Section(header: Text("Statistics")) {
-            StatSection(title: "SUB", stringValue: $subs) { workout.submissions = $0 }
-            StatSection(title: "TAP", stringValue: $taps) { workout.taps = $0 }
-            StatSection(title: "SWP", stringValue: $swps) { workout.sweeps = $0 }
-            StatSection(title: "TKD", stringValue: $take) { workout.takedowns = $0 }
+            StatSection(title: "SUB", stringValue: $subs, updateValue: { workout.submissions = $0 })
+            StatSection(title: "TAP", stringValue: $taps, updateValue: { workout.taps = $0 })
+            StatSection(title: "SWP", stringValue: $swps, updateValue: { workout.sweeps = $0 })
+            StatSection(title: "TKD", stringValue: $take, updateValue: { workout.takedowns = $0 })
         }
-        .listRowBackground(Color.white)
     }
     
     private func timeSelectionRow(title: String, showingPicker: Binding<Bool>, time: Binding<Date>) -> some View {
         HStack {
             Text(title)
             Spacer()
-            Button(action: {
-                showingPicker.wrappedValue = true
-            }) {
+            Button(action: { showingPicker.wrappedValue.toggle() }) {
                 Text(formatter.string(from: time.wrappedValue))
                     .foregroundColor(.blue)
             }
@@ -95,6 +108,12 @@ struct FinishedWorkoutView: View {
             }
         }
     }
+    
+    private var timeSection: some View {
+        DateAndTimePicker(selectedStartDateAndTime: $startTime, selectedEndDateAndTime: $endTime)
+    }
+    
+    
 }
 
 // MARK: - StatSection
@@ -132,7 +151,7 @@ struct StatSection: View {
                     stringValue = "\(newValue)"
                     updateValue(newValue)
                 }), in: 0...50) {
-                    Text("\(intValue)")
+                    //Text("\(intValue)")
                 }
                 
                 Button(action: {}) {
@@ -166,6 +185,7 @@ struct WorkoutView2_Previews: PreviewProvider {
         sweeps: 4,
         takedowns: 3,
         rounds: 5,
-        roundLength: 6
+        roundLength: 6,
+        bodyWeight: 80.0
     )
 }

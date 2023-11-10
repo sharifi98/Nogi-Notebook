@@ -96,6 +96,7 @@ struct WorkoutListView: View {
                 }
             }
             .navigationTitle("Log")
+            .background(Color.gray.opacity(0.2))
         }
     }
 }
